@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-import healthcareImg from "../assets/industries/health-industry.jpg";
+import healthcareImg from "../assets/Industries/health-industry.jpg";
 // import financeImg from "../assets/industries/finance.jpg";
 import manufacturingImg from "../assets/Industries/Manufacturing Industries.jpg";
 import ecommerceImg from "../assets/Industries/E-commerce.jpg";

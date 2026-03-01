@@ -7,6 +7,7 @@ import SolutionsSection from "./Components/SolutionsSections";
 import ScrollSyncSection from "./Components/ScrollSyncSelection";
 import ProductsSection from "./Components/ProductSection";
 import IndustriesSection from "./Components/IndustriesSection";
+import DotcluLogo from "./assets/dotclu-logo.png"
 import { useState } from "react";
 
 
@@ -32,7 +33,7 @@ const App = () => {
   <div className="container mx-auto flex items-center justify-between py-4 px-6">
     
     <div className="flex items-center gap-3">
-      <img src="/dotclu-logo.png" alt="" className="h-16 w-16" />
+      <img src={DotcluLogo} alt="" className="h-16 w-16" />
       <span className="font-display text-lg font-bold tracking-wider"></span>
     </div>
 
