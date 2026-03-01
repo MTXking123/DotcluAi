@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 import dotVisionImg from "../assets/ai-chip.jpg";
-import dotAiImg from "../assets/dot-Ai.avif";
+import dotAiImg from "../assets/Dot-Ai.avif";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 25 },
