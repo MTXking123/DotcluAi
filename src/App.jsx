@@ -7,6 +7,7 @@ import SolutionsSection from "./Components/SolutionsSections";
 import ScrollSyncSection from "./Components/ScrollSyncSelection";
 import ProductsSection from "./Components/ProductSection";
 import IndustriesSection from "./Components/IndustriesSection";
+import NeuralBackground from "./Components/NeuralBackground";
 import DotcluLogo from "./assets/dotclu-logo.png"
 import { useState } from "react";
 
@@ -24,9 +25,9 @@ const fadeUp = {
 const App = () => {
     const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-hidden bg-zinc-950">
-      {/* Subtle background */}
-      <div className="fixed inset-0 grid-pattern opacity-20 pointer-events-none" />
+       <div className="min-h-screen bg-background text-foreground overflow-hidden">
+
+      <NeuralBackground/>
 
       {/* Navbar */}
 <nav className="fixed top-0 left-0 w-full z-50 border-b border-border  bg-white">
