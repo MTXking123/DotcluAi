@@ -10,6 +10,9 @@ import IndustriesSection from "./Components/IndustriesSection";
 import NeuralBackground from "./Components/NeuralBackground";
 import DotcluLogo from "./assets/dotclu-logo.png"
 import { useState } from "react";
+import WhatsApp from "./assets/WhatsApp.svg.webp"
+import ContactForm from "./Components/ContactUs"
+
 
 
 const fadeUp = {
@@ -24,13 +27,18 @@ const fadeUp = {
 
 const App = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [activeMenu, setActiveMenu] = useState(null);
+    const [isLocked, setIsLocked] = useState(false); 
+    const [showForm, setShowForm] = useState(false);
+    
   return (
        <div className="min-h-screen bg-background text-foreground overflow-hidden">
 
       <NeuralBackground/>
+      
 
       {/* Navbar */}
-<nav className="fixed top-0 left-0 w-full z-50 border-b border-border  bg-white">
+<nav className="fixed top-0 left-0 w-full z-50  bg-white">
   <div className="container mx-auto flex items-center justify-between py-4 px-6">
     
     <div className="flex items-center gap-3">
@@ -38,39 +46,237 @@ const App = () => {
       <span className="font-display text-lg font-bold tracking-wider"></span>
     </div>
 
-    {/* Desktop Links */}
-    <div className="hidden md:flex items-center gap-8 font-body text-sm text-muted-foreground">
-      <a href="#solutions" className="hover:text-foreground transition-colors">Products</a>
-      <a href="#services" className="hover:text-foreground transition-colors">Services</a>
-      <a href="#network" className="hover:text-foreground transition-colors">Industries</a>
-      <a href="#contact" className="hover:text-foreground transition-colors">About</a>
-      <a href="#careers" className="hover:text-foreground transition-colors">Careers</a>
+    {showForm && (
+  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[100]">
+    
+    {/* FORM CONTAINER */}
+    <div className="bg-white p-6 rounded-lg w-full max-w-lg relative">
+
+      {/* CLOSE BUTTON */}
+      <button
+        onClick={() => setShowForm(false)}
+        className="absolute top-3 right-3 text-gray-500"
+      >
+        ✕
+      </button>
+
+      {/* YOUR FORM COMPONENT */}
+      <ContactForm/>
+      
     </div>
+  </div>
+)}
+
+    {/* Desktop Links */}
+    
+ <div className="hidden md:flex items-center gap-8 relative text-sm">
+
+          {[
+            "products",
+            "services",
+            "industries",
+            "about",
+            "careers",
+          ].map((menu) => (
+            <div
+              key={menu}
+              onMouseEnter={() => {
+                if (!isLocked) setActiveMenu(menu);
+              }}
+              onMouseLeave={() => {
+                if (!isLocked) setActiveMenu(null);
+              }}
+            >
+              <span
+                onClick={() => {
+                  if (activeMenu === menu && isLocked) {
+                    setIsLocked(false);
+                    setActiveMenu(null);
+                  } else {
+                    setActiveMenu(menu);
+                    setIsLocked(true);
+                  }
+                }}
+                className="cursor-pointer capitalize hover:text-black"
+              >
+                {menu}
+              </span>
+            </div>
+          ))}
+
+          {/* DROPDOWN */}
+          <div
+            className="absolute left-0 top-full w-full flex justify-center"
+            onMouseEnter={() => {
+              if (!isLocked && activeMenu) setActiveMenu(activeMenu);
+            }}
+            onMouseLeave={() => {
+              if (!isLocked) setActiveMenu(null);
+            }}
+          >
+            {activeMenu && (
+              <div className="mt-2 bg-white shadow-xl border p-6 flex gap-10 w-fit max-w-[95vw]">
+
+                {/* PRODUCTS */}
+                {activeMenu === "products" && (
+                  <div className="flex flex-col gap-3 min-w-[200px]">
+                    <a href="#">DotVision</a>
+                    <a href="#">Dot-AI/VI</a>
+                  </div>
+                )}
+
+                {/* SERVICES */}
+                {activeMenu === "services" && (
+                  <>
+                    <div className="flex flex-col gap-3 min-w-[220px]">
+                      <a href="#">IT-Consulting Services</a>
+                      <a href="#">Cyber Security Services</a>
+                      <a href="#">IT Training</a>
+                    </div>
+                    <div className="flex flex-col gap-3 min-w-[220px]">
+                      <a href="#">Custom Software Development</a>
+                      <a href="#">IT Support</a>
+                      <a href="#">AR/VR Services</a>
+                    </div>
+                    <div className="flex flex-col gap-3 min-w-[220px]">
+                      <a href="#">Cloud Solutions</a>
+                      <a href="#">Data Analytics</a>
+                      <a href="#">AI & Gen AI</a>
+                    </div>
+                  </>
+                )}
+
+                {/* INDUSTRIES */}
+                {activeMenu === "industries" && (
+                  <>
+                    <div className="flex flex-col gap-3 min-w-[200px]">
+                      <a href="#">Banking & Finance</a>
+                      <a href="#">Insurance</a>
+                      <a href="#">Manufacturing</a>
+                    </div>
+                    <div className="flex flex-col gap-3 min-w-[200px]">
+                      <a href="#">E-Commerce</a>
+                      <a href="#">Government</a>
+                      <a href="#">Retail</a>
+                    </div>
+                    <div className="flex flex-col gap-3 min-w-[200px]">
+                      <a href="#">Education</a>
+                      <a href="#">Healthcare</a>
+                    </div>
+                  </>
+                )}
+
+                {/* ABOUT */}
+                {activeMenu === "about" && (
+                  <div className="flex flex-col gap-3 min-w-[200px]">
+                    <a href="#">About Us</a>
+                    <a href="#">Contact Us</a>
+                  </div>
+                )}
+
+                {/* CAREERS */}
+                {activeMenu === "careers" && (
+                  <div className="flex flex-col gap-3 min-w-[200px]">
+                    <a href="#">Career with Us</a>
+                  </div>
+                )}
+
+              </div>
+            )}
+          </div>
+        </div>
+
 
     {/* Desktop Button */}
-    <button className="hidden md:flex items-center gap-1 bg-primary text-primary-foreground hover:bg-primary/90 font-display text-xs tracking-wider px-4 py-2 rounded-md transition-colors cursor-pointer">
-       Contact Us 
-       
-       <ChevronRight className="h-3 w-3" />
-    </button>
+<div className="hidden md:flex items-center gap-3">
 
-    {/* Mobile Toggle */}
-    <button
-      className="md:hidden"
-      onClick={() => setIsOpen(!isOpen)}
-    >
-      {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-    </button>
-  </div>
+  <a
+    href="https://wa.me/919999999999"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-1"
+  >
+   <img src={WhatsApp} alt="" className="h-10 w-10 " />
+  </a>
 
-  {/* Mobile Menu */}
-  {isOpen && (
-    <div className="md:hidden px-6 pb-6 flex flex-col gap-4 text-sm text-muted-foreground bg-background border-t border-border">
-      <a href="#solutions" onClick={() => setIsOpen(false)}>Products</a>
-      <a href="#services" onClick={() => setIsOpen(false)}>Services</a>
-      <a href="#network" onClick={() => setIsOpen(false)}>Industries</a>
-      <a href="#contact" onClick={() => setIsOpen(false)}>About</a>
-      <a href="#careers" onClick={() => setIsOpen(false)}>Careers</a>
+<button
+  onClick={() => setShowForm(true)}
+  className="bg-[#6D4EF0] text-white px-4 py-2 rounded-md text-xs flex items-center gap-1"
+>
+  Contact Us
+</button>
+
+</div>
+
+        <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <X /> : <Menu />}
+        </button>
+      </div>
+
+      {/* ================= MOBILE ================= */}
+      {isOpen && (
+        <div className="md:hidden px-6 pb-6 flex flex-col gap-4 border-t">
+
+          {["products", "services", "industries", "about", "careers"].map(
+            (menu) => (
+              <div key={menu}>
+                <button
+                  onClick={() =>
+                    setActiveMenu(activeMenu === menu ? null : menu)
+                  }
+                  className="w-full text-left font-medium capitalize"
+                >
+                  {menu}
+                </button>
+
+                <div
+                  className={`overflow-hidden transition-all duration-300 ${
+                    activeMenu === menu ? "max-h-96 mt-2" : "max-h-0"
+                  }`}
+                >
+                  <div className="pl-4 flex flex-col gap-2">
+
+                    {menu === "products" && (
+                      <>
+                        <a href="#">DotVision</a>
+                        <a href="#">Dot-AI/VI</a>
+                      </>
+                    )}
+
+                    {menu === "services" && (
+                      <>
+                        <a href="#">IT-Consulting</a>
+                        <a href="#">Cyber Security</a>
+                        <a href="#">Cloud</a>
+                        <a href="#">AI</a>
+                      </>
+                    )}
+
+                    {menu === "industries" && (
+                      <>
+                        <a href="#">Banking</a>
+                        <a href="#">E-Commerce</a>
+                        <a href="#">Healthcare</a>
+                      </>
+                    )}
+
+                    {menu === "about" && (
+                      <>
+                        <a href="#">About Us</a>
+                        <a href="#">Contact</a>
+                      </>
+                    )}
+
+                    {menu === "careers" && (
+                      <a href="#">Career with Us</a>
+                    )}
+
+                  </div>
+                  </div>
+              </div>
+            )
+          )}
+          
 
       <button className="mt-3 bg-primary text-primary-foreground py-2 rounded-md text-xs tracking-wider">
         Contact Us
@@ -147,11 +353,6 @@ const App = () => {
             >
               Request Briefing <ArrowRight className="h-4 w-4" />
             </button>
-            <button
-              className="flex items-center justify-center gap-2 border border-border text-foreground hover:bg-muted font-display text-sm tracking-wider px-6 py-3 rounded-md transition-colors cursor-pointer"
-            >
-              <FileText className="h-4 w-4" /> Download Whitepaper
-            </button>
           </motion.div>
         </motion.div>
       </section>
@@ -161,7 +362,7 @@ const App = () => {
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
-              <img src="/dotclu-logo.png" alt="" className="h-16 w-16" />
+              <img src={DotcluLogo} alt="" className="h-16 w-16" />
               <span className="font-display text-sm font-bold tracking-wider">
                 Dotclu<span className="text-primary">AI</span>
               </span>

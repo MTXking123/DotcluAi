@@ -60,15 +60,7 @@ const HeroSection = () => (
             at the speed of modern warfare.
           </motion.p>
 
-          <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
-            <button className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 font-display text-sm tracking-wider px-6 py-3 rounded-md transition-colors">
-              Explore Platform <ArrowRight className="h-4 w-4" />
-            </button>
 
-            <button className="flex items-center gap-2 border border-border text-foreground hover:bg-muted font-display text-sm tracking-wider px-6 py-3 rounded-md transition-colors">
-              <Play className="h-4 w-4" /> Watch Demo
-            </button>
-          </motion.div>
         </motion.div>
 
         {/* RIGHT SIDE IMAGE CARD */}

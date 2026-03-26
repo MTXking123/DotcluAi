@@ -48,7 +48,7 @@ export default function ScrollSyncSelection() {
       {/* IMAGE SECTION */}
       <div className="relative w-full h-[650px] overflow-hidden">
 
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="sync">
           <motion.img
             key={sections[activeIndex].image}
             src={sections[activeIndex].image}
@@ -56,20 +56,20 @@ export default function ScrollSyncSelection() {
             className="absolute w-full h-full object-cover"
             initial={{
               opacity: 0,
-              scale: 1.1,
+              // scale: 1.1,
               filter: "blur(20px)",
             }}
             animate={{
               opacity: 1,
-              scale: 1,
+              // scale: 1,
               filter: "blur(0px)",
             }}
             exit={{
               opacity: 0,
-              scale: 1.05,
+              // scale: 1.05,
               filter: "blur(10px)",
             }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
+            transition={{ duration: 0.9, ease: "easeInOut" }}
           />
         </AnimatePresence>
 
